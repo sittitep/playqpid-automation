@@ -1,5 +1,5 @@
 class WebPostGenerator
-  attr_accessor :id, :post_id, :photos, :web_post, :section_hash
+  attr_accessor :id, :post_id, :photos, :web_post, :section_hash, :web_post_path
 
   def initialize(args)
     @id = args[:id]
@@ -13,6 +13,7 @@ class WebPostGenerator
       tag: @sections[3],
       reference: @sections[4]
     }
+    @web_post_path = "https://www.playqpid.com/" + Date.today.strftime.gsub("-","/") + "/#{self.post_id}.html"
   end
 
   def build
