@@ -17,7 +17,6 @@ class FB
         )
         web_post.build
         web_post.save
-        raise
       end
       next_posts = posts.next_page
       if next_posts.present?
