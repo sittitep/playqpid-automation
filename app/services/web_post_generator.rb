@@ -1,11 +1,11 @@
 class WebPostGenerator
-  attr_accessor :id, :post_id, :photos, :web_post, :section_hash, :web_post_path
+  attr_accessor :id, :post_id, :photos, :web_post, :section_hash, :web_post_path, :created_at
 
   def initialize(args)
     @id = args[:id]
     @post_id = @id.split("_").last
     @photos = args[:photos]
-    @sections = args[:content].gsub("\n","").split("...")
+    @sections = args[:content].gsub(/\n...\n/,"...").split("...")
     @section_hash = {
       title: @sections[0],
       description: @sections[1],
@@ -13,7 +13,8 @@ class WebPostGenerator
       tag: @sections[3],
       reference: @sections[4]
     }
-    @web_post_path = "https://www.playqpid.com/" + Date.today.strftime.gsub("-","/") + "/#{self.post_id}.html"
+    @created_at = args[:created_at].split("T").first
+    @web_post_path = "https://www.playqpid.com/" + self.created_at.gsub("-","/") + "/#{self.post_id}.html"
   end
 
   def build
@@ -39,12 +40,7 @@ class WebPostGenerator
   end
 
   def save
-    title = [
-      Date.today.strftime,
-      self.post_id
-    ].join("-")
-
-    File.open("web_posts/#{title}.markdown", "w+") do |f|
+    File.open("web_posts/#{self.created_at}-#{self.post_id}.markdown", "w+") do |f|
       f.write(self.web_post)
     end
   end

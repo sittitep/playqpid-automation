@@ -22,12 +22,12 @@ class FB
         web_post = WebPostGenerator.new(
           id: post["id"], 
           content: post["message"], 
-          photos: get_photos(attachments)
+          photos: get_photos(attachments),
+          created_at: post["created_time"]
         )
         web_post.build
         web_post.save
-        
-        attach_web_post_to_page_post(web_post.id, post["message"] + "\n\n[#{web_post.web_post_path}]")
+        attach_web_post_to_page_post(web_post.id, post["message"] + "\n\n[ #{web_post.web_post_path} ]")
       end
       next_posts = posts.next_page
       if next_posts.present?
