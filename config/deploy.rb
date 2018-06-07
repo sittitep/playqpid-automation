@@ -2,7 +2,7 @@
 lock "~> 3.11.0"
 
 set :application, "playqpid-automation"
-set :repo_url, "https://github.com/sittitep/playqpid-automation.git"
+set :repo_url, "http://github.com/sittitep/playqpid-automation.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -26,6 +26,9 @@ append :linked_files, 'config/database.yml', 'config/secrets.yml'
 # Default value for linked_dirs is []
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 
+set(:config_files, %w(
+  database.yml
+))
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
