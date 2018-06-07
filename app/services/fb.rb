@@ -16,7 +16,10 @@ class FB
     posts = FB.client.get_connections(ENV['FB_PAGE_ID'], 'posts')
     loop do
       posts.each do |post|
-        next if post["message"].blank? || !post["message"].match(/#goplayqpid/) || post["message"].match(/www.playqpid.com/)
+        next if post["message"].blank? || !post["message"].match(/#goplayqpid/)
+        if post["message"].match(/www.playqpid.com/)
+          break
+        end
         attachments = FB.client.get_connections(post["id"], 'attachments')
 
         web_post = WebPostGenerator.new(
@@ -25,6 +28,7 @@ class FB
           photos: get_photos(attachments),
           created_at: post["created_time"]
         )
+
         web_post.build
         web_post.save
         attach_web_post_to_page_post(web_post.id, post["message"] + "\n\n[ #{web_post.web_post_path} ]")
