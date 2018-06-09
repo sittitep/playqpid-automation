@@ -31,7 +31,7 @@ class FB
 
         web_post.build
         web_post.save
-        attach_web_post_to_page_post(web_post.id, post["message"] + "\n\n[ #{web_post.web_post_path} ]")
+        # attach_web_post_to_page_post(web_post.id, post["message"] + "\n\n[ #{web_post.web_post_path} ]")
       end
       next_posts = posts.next_page
       if next_posts.present?
