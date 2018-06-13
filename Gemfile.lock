@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/seuros/capistrano-puma.git
+  revision: 81647bc8402ff1cb485e81d9ec803dfec31aa851
+  specs:
+    capistrano3-puma (3.1.1)
+      capistrano (~> 3.7)
+      capistrano-bundler
+      puma (~> 3.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -179,6 +188,7 @@ DEPENDENCIES
   byebug
   capistrano (~> 3.10)
   capistrano-rails (~> 1.4)
+  capistrano3-puma!
   dotenv-rails
   koala
   listen (>= 3.0.5, < 3.2)
