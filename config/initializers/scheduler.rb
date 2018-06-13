@@ -8,7 +8,7 @@ if (
 
   scheduler = Rufus::Scheduler.new
 
-  scheduler.in '1h' do
+  scheduler.every '1h' do
     # Delete all prev posts
     FileUtils.rm_rf("#{Rails.root.join('web_posts')}/.", secure: true)
     # Generate new posts
