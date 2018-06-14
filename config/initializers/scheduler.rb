@@ -8,11 +8,9 @@ if (
   scheduler = Rufus::Scheduler.new
 
   scheduler.every '2h' do
-    # Delete all prev posts
+    Rails.logger.info "[#{Time.now}] Start fetching facebook posts"
     FileUtils.rm_rf("#{ENV['PLAYQPID_WEB_POST_FOLDER_PATH']}/.", secure: true)
-    # Generate new posts
     FB.generate_web_post_from_page_post
-    # Move new posts to web
     FileUtils.cp_r("#{ENV['PLAYQPID_WEB_POST_FOLDER_PATH']}/.", "#{ENV['PLAYQPID_POST_FOLDER_PATH']}/")
     cmd = <<~EOF
       cd #{ENV['PLAYQPID_FOLDER_PATH']}
@@ -23,6 +21,15 @@ if (
     `#{cmd}`
 
     FileUtils.rm_rf("#{Rails.root.join('web_posts')}/.", secure: true)
+    Rails.logger.info "[#{Time.now}] Finished"
+  end
+
+  scheduler.in '1s' do
+    Rails.logger.info "[#{Time.now}] Scheduler has started"
+  end
+
+  scheduler.every '15s' do
+    Rails.logger.info "[#{Time.now}] Scheduler is still running"
   end
 
   scheduler.join
