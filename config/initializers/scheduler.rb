@@ -2,13 +2,12 @@ require 'rufus-scheduler'
 
 if (
   ! defined?(Rails::Console) &&
-  File.basename($0) != 'rake' &&
-  Rails.configuration.respond_to?(:scheduler)
+  File.basename($0) != 'rake'
 ) then
 
   scheduler = Rufus::Scheduler.new
 
-  scheduler.every '1h' do
+  scheduler.every '2h' do
     # Delete all prev posts
     FileUtils.rm_rf("#{Rails.root.join('web_posts')}/.", secure: true)
     # Generate new posts
