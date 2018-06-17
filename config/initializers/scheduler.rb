@@ -20,7 +20,7 @@ if (
     EOF
     `#{cmd}`
 
-    FileUtils.rm_rf("#{Rails.root.join('web_posts')}/.", secure: true)
+    FileUtils.rm_rf("#{ENV['PLAYQPID_WEB_POST_FOLDER_PATH']}/.", secure: true)
     Rails.logger.info "[#{Time.now}] Finished"
   end
 
