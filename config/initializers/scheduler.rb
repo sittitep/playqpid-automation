@@ -16,6 +16,7 @@ if (
       cd #{ENV['PLAYQPID_FOLDER_PATH']}
       git add .
       git commit -m "Add posts"
+      git pull heroku master
       git push heroku master
     EOF
     `#{cmd}`
